@@ -11,6 +11,8 @@
     <modules>
         <module>slf4j-demo</module>
         <module>java-base</module>
+        <module>cache-demo</module>
+        <module>juc</module>
     </modules>
 
     <properties>
