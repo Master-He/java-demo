@@ -13,6 +13,7 @@
         <module>java-base</module>
         <module>cache-demo</module>
         <module>juc</module>
+        <module>jvm</module>
     </modules>
 
     <properties>
