@@ -14,6 +14,7 @@
         <module>cache-demo</module>
         <module>juc</module>
         <module>jvm</module>
+        <module>spi</module>
     </modules>
 
     <properties>
