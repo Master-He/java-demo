@@ -15,6 +15,7 @@
         <module>juc</module>
         <module>jvm</module>
         <module>spi</module>
+        <module>servlet-demo</module>
     </modules>
 
     <properties>
