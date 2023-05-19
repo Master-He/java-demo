@@ -14,7 +14,7 @@ public class SelectionSort {
             int minIndex = i;
             for (int j=i; j<nums.length; j++) {
                 if (nums[j] < nums[minIndex]) {
-                    minIndex = j;
+                    minIndex = j;  // 记录最小元素的下标，遍历完全部后才进行交换
                 }
             }
             int tmp = nums[i];
