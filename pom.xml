@@ -17,6 +17,7 @@
         <module>spi</module>
         <module>servlet-demo</module>
         <module>guice-demo</module>
+        <module>zookeeper-curator-demo</module>
     </modules>
 
     <properties>
