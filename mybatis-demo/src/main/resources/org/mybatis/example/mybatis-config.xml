@@ -20,17 +20,19 @@
             <dataSource type="POOLED">
                 <!--数据库连接信息, mysql5.7-->
                 <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+
                 <!--数据库连接信息, mysql8-->
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/jdbcstudy?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai"/>
-                <property name="username" value="root"/>
-                <property name="password" value="123456"/>
+                <!--<property name="driver" value="com.mysql.cj.jdbc.Driver"/>-->
+                <!--&lt;!&ndash;"&amp;" 是 "&" 的转义&ndash;&gt;-->
+                <!--<property name="url" value="jdbc:mysql://localhost:3306/jdbcstudy?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="123456"/>-->
 
                 <!--使用配置文件-->
-                <!--<property name="driver" value="${driver}"/>-->
-                <!--<property name="url" value="${url}"/>-->
-                <!--<property name="username" value="${username}"/>-->
-                <!--<property name="password" value="${password}"/>-->
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
     </environments>
