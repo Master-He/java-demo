@@ -141,6 +141,7 @@ public class UserMapperTest extends TestCase {
 
         System.out.println("返回的id： " + user.getId());
         // sqlSession.commit();  // 如果没有设置自动提交，则需要执行commit()方法
+        // sqlSession.rollback();  // 回滚！
     }
 
     public void testUpdateName() throws IOException {
@@ -153,13 +154,13 @@ public class UserMapperTest extends TestCase {
     public void testUpdateDynamic() {
         User user = new User();
         user.setName("qwer");
-        user.setId(11);
+        user.setId(14);
         int count = userMapper.updateDynamic(user);
         System.out.println("影响行数：" + count);
 
         User user2 = new User();
         user2.setMoney(999);
-        user2.setId(11);
+        user2.setId(14);
         count = userMapper.updateDynamic(user2);
         System.out.println("影响行数：" + count);
     }

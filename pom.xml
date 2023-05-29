@@ -20,6 +20,7 @@
         <module>zookeeper-curator-demo</module>
         <module>kafka-dmeo</module>
         <module>mybatis-demo</module>
+        <module>spring-demo</module>
     </modules>
 
     <properties>
