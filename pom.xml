@@ -19,6 +19,7 @@
         <module>guice-demo</module>
         <module>zookeeper-curator-demo</module>
         <module>kafka-dmeo</module>
+        <module>mybatis-demo</module>
     </modules>
 
     <properties>

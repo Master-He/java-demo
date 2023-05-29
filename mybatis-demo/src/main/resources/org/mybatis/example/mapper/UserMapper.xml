@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.mybatis.example.mapper.UserMapper">
+
+    <!--开启二级缓存: 还需要在mybatis-config.xml开启全局缓存（默认开启全局缓存）-->
+    <cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+    <!--cache 还可以自定义cache类或者第三方cache:Ehcache  通过type字段指定-->
+
+    <sql id="all_field">
+        id, name, password, email, birthday, money
+    </sql>
+
+    <resultMap id="userResultMap" type="org.mybatis.example.pojo.User">
+        <!-- 这里可以把数据库中的带有下划线的字段名， 比如pass_word (写到column字段)转换成java驼峰类型 passWord （写到property字段）-->
+        <!-- 因为我的数据库没有下划线命名，这里就不演示具体案例了-->
+        <result column="password" property="password"/>
+    </resultMap>
+
+    <select id="selectAll" resultType="org.mybatis.example.pojo.User">
+        # select * from users;
+        select <include refid="all_field"/> from users;  # 等同于 *
+    </select>
+
+    <!--resultType属性 用 resultMap属性替换-->
+    <select id="selectAllWithResultMap" resultMap="userResultMap">
+        select * from users;
+    </select>
+
+    <!--
+        1、 #{}: 会将其替换成？号， 为了防止sql注入
+        2、 ${}: 拼sql， 会存在sql注入问题。  表命后者列名不固定的情况下，可以用${}
+
+        可以加参数类型： parameterType (也可以省略不写)
+        特殊字符的处理： 比如 < 和 > 号
+            1. 转义字符
+                特殊字符     转义序列
+                <           &lt;
+                >           &gt;
+                &           &amp;
+                "           &quot;
+                '           &apos;
+            2. CDATA区
+
+    -->
+    <!--useCache="true"， 默认值：对 select 元素为 true。-->
+    <select id="selectOne" parameterType="int" resultType="org.mybatis.example.pojo.User" useCache="true">
+        select * from users where id = #{id};
+    </select>
+
+    <select id="selectRange" resultType="org.mybatis.example.pojo.User">
+        select * from users where id <![CDATA[>=]]> #{startID} and id <![CDATA[<=]]> #{endID};
+    </select>
+
+
+    <select id="selectByEmail" resultType="org.mybatis.example.pojo.User">
+        select * from users where email=#{email}
+    </select>
+
+    <select id="selectByName" resultType="org.mybatis.example.pojo.User">
+        select * from users where name=#{name}
+    </select>
+
+    <select id="selectByNameEmail" resultType="org.mybatis.example.pojo.User">
+        select *
+        from users
+        <where>
+            <if test="name != null and name != '' ">
+                and name = #{name}
+            </if>
+            <if test="email != null and email != '' ">
+                and email = #{email}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="selectOneDynamic" resultType="org.mybatis.example.pojo.User">
+        select * from users where
+        # 相当于switch
+        <choose>
+            <!--相当case-->
+            <when test="name != null">
+                name=#{name}
+            </when>
+            <!--相当case-->
+            <when test="email != null">
+                email=#{email}
+            </when>
+            <!--相当default-->
+            <otherwise>
+                id = 1
+            </otherwise>
+        </choose>
+    </select>
+
+
+    <!--如果需要获取插入数据后返回的主键， 则需要设置 useGeneratedKeys="true" keyProperty="id"-->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into users(name, password, email, birthday, money)
+        values(#{name}, #{password}, #{email}, #{birthday}, #{money});
+    </insert>
+
+    <update id="updateName">
+        update users
+        set name=#{name}
+        where id=#{id};
+    </update>
+
+    <update id="updateDynamic">
+        update users
+        <set>
+            <if test="name!=null">
+                name=#{name}
+            </if>
+            <if test="password!=null">
+                password=#{password}
+            </if>
+            <if test="money!=null">
+                money=#{money}
+            </if>
+            <if test="email!=null">
+                email=#{email}
+            </if>
+            <if test="birthday!=null">
+                birthday=#{birthday}
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+
+    <delete id="deleteById">
+        delete from users where id=#{id};
+    </delete>
+    <delete id="deleteByIds">
+        # foreach标签的使用， 完成ids集合的遍历
+        delete
+        from users
+        where id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

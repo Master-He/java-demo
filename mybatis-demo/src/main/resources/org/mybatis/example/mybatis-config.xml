@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--来自官方文档 https://mybatis.org/mybatis-3/zh/getting-started.html -->
+<configuration>
+
+    <!--引入外部配置文件-->
+    <properties resource="mysql.properties"/>
+    
+    <settings>
+        <!--开启全局缓存， 默认就是开启的-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <!--数据库连接信息, mysql5.7-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--数据库连接信息, mysql8-->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/jdbcstudy?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=Asia/Shanghai"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+
+                <!--使用配置文件-->
+                <!--<property name="driver" value="${driver}"/>-->
+                <!--<property name="url" value="${url}"/>-->
+                <!--<property name="username" value="${username}"/>-->
+                <!--<property name="password" value="${password}"/>-->
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <!--加载sql的映射文件, 注意resource的分隔符用/ class的分隔符才用.-->
+        <mapper resource="org/mybatis/example/mapper/UserMapper.xml"/>
+        <!--<mapper class="org.mybatis.example.mapper.UserMapper"/>-->
+
+        <!-- 用package的话， 可以统一所有的mapper-->
+        <!--<package name="org.mybatis.example.mapper"/>-->
+    </mappers>
+</configuration>
