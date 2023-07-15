@@ -21,7 +21,7 @@ import java.util.Random;
 public class BookDaoImpl implements BookDao {
 
     // @Value("bookDaoImpl")
-    @Value("${name}")
+    @Value("${book.dao.name}")
     private String name;
 
     @Override

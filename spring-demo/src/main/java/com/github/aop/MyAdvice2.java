@@ -18,9 +18,9 @@ public class MyAdvice2 {
 
     @Around("pt()")
     public Object around(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("before");
+        System.out.println("AOP============ before  getRandomNumber");
         Object res = pjp.proceed();
-        System.out.println("after");
+        System.out.println("AOP============ after  getRandomNumber");
         return res;
     }
 

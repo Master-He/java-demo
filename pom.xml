@@ -21,6 +21,9 @@
         <module>kafka-dmeo</module>
         <module>mybatis-demo</module>
         <module>spring-demo</module>
+        <module>click-house-demo</module>
+        <module>clickhouse-demo</module>
+        <module>netty-demo</module>
     </modules>
 
     <properties>

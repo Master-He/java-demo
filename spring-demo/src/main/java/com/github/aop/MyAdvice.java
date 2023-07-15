@@ -38,19 +38,19 @@ public class MyAdvice {
     // @Before("pt()")
     public void method() {
         // AOP本质就是代理模式
-        System.out.println("调用前时间：" + System.currentTimeMillis());
+        System.out.println("AOP=========调用前时间：" + System.currentTimeMillis());
     }
 
     // @After("pt()")
     public void method2() {
-        System.out.println("调用后时间：" + System.currentTimeMillis());
+        System.out.println("AOP=========调用后时间：" + System.currentTimeMillis());
     }
 
     @Around("pt()")
     public void method3(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.println("before");
+        System.out.println("AOP============before");
         pjp.proceed();
-        System.out.println("after");
+        System.out.println("AOP============after");
     }
 
 }

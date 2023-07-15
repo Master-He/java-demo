@@ -19,10 +19,14 @@ public class AppForAnnotation {
         // BookDao bookDao = ctx.getBean(BookDao.class);
         BookDao bookDao = ctx.getBean("bookdao", BookDao.class);
         bookDao.get();
+        int randomNumber = bookDao.getRandomNumber();
+        System.out.println("random number：" + randomNumber);
 
+        System.out.println("++++++++++++++++我是分割线+++++++++++++++++++++");
         BookServer bookServer = ctx.getBean(BookServer.class);
         bookServer.service();
 
+        System.out.println("++++++++++++++++我是分割线+++++++++++++++++++++");
         DataSource dataSource = ctx.getBean(DataSource.class);
         System.out.println(dataSource);
 
