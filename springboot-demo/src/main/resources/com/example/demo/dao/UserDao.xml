@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserDao">
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        insert into users(name, password, email, birthday, money)
+        values(#{name}, #{password}, #{email}, #{birthday}, #{money})
+    </insert>
+
+
+    <update id="update">
+        update users
+        <set>
+            <if test="name!=null">
+                name=#{name}
+            </if>
+            <if test="password!=null">
+                password=#{password}
+            </if>
+            <if test="money!=null">
+                money=#{money}
+            </if>
+            <if test="email!=null">
+                email=#{email}
+            </if>
+            <if test="birthday!=null">
+                birthday=#{birthday}
+            </if>
+        </set>
+        where id=#{id};
+    </update>
+
+
+
+    <!--    <select id="findAll" resultType="com.example.demo.pojo.User"> -->
+    <select id="findAll" resultType="User"> # 在配置文件中设置别名： type-aliases-package: com.example.demo.pojo
+        select * from users;
+    </select>
+
+
+</mapper>
