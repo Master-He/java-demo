@@ -23,14 +23,6 @@ public class ForTestConditionApplication {
          *
          * */
 
-        /*
-            @Import的四个作用  https://zhuanlan.zhihu.com/p/344539305
-            1. 引入其他的@Configuration
-            2. 直接初始化其他类的Bean
-            3. 指定实现ImportSelector(以及DefferredServiceImportSelector)的类，用于个性化加载
-            4. 指定实现ImportBeanDefinitionRegistrar的类，用于个性化加载
-        * */
-
         ConfigurableApplicationContext context = SpringApplication.run(ForTestConditionApplication.class);
 
         // 自己实现Condition注解： 根据是否引入common.lang3.依赖，来判断是否注入pojoForTest对象
